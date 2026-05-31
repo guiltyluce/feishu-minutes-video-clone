@@ -1,6 +1,6 @@
-# 飞书妙记视频纪要蒸馏助手 / feishu-minutes-video-distiller
+# 飞书妙记视频纪要蒸馏助手 / feishu-minutes-video-clone
 
-`feishu-minutes-video-distiller` 是一个面向会议、培训和录屏资料沉淀的 Skill。它把飞书/Lark 妙记或本地会议视频整理成高清视频、中文字幕、结构化纪要文档和可预览的视频入口。
+`feishu-minutes-video-clone` 是一个面向会议、培训和录屏资料沉淀的 Skill。它把飞书/Lark 妙记或本地会议视频整理成高清视频、中文字幕、结构化纪要文档和可预览的视频入口。
 
 “蒸馏”强调从长视频和长 transcript 中提取真正可用的结论、行动项、时间线和知识片段。
 
@@ -34,9 +34,9 @@
 │   ├── mux_subtitles.sh
 │   └── validate_skill_package.py
 └── skill/
-    └── feishu-minutes-video-distiller/
+    └── feishu-minutes-video-clone/
         ├── SKILL.md
-        └── feishu-minutes-video-distiller.zip
+        └── feishu-minutes-video-clone.zip
 ```
 
 ## 快速检查
@@ -51,14 +51,14 @@ bash -n scripts/mux_subtitles.sh
 参赛上传包位置：
 
 ```text
-skill/feishu-minutes-video-distiller/feishu-minutes-video-distiller.zip
+skill/feishu-minutes-video-clone/feishu-minutes-video-clone.zip
 ```
 
 安装到本地 Skill 目录：
 
 ```bash
 mkdir -p ~/.codex/skills
-unzip -o skill/feishu-minutes-video-distiller/feishu-minutes-video-distiller.zip -d ~/.codex/skills/
+unzip -o skill/feishu-minutes-video-clone/feishu-minutes-video-clone.zip -d ~/.codex/skills/
 ```
 
 ## 参赛信息

@@ -1,5 +1,5 @@
 ---
-name: feishu-minutes-video-distiller
+name: feishu-minutes-video-clone
 description: 飞书妙记视频纪要蒸馏助手：把飞书/Lark 妙记或本地会议视频整理成高清视频、中文字幕、结构化纪要文档和可预览入口；适用于会议复盘、培训沉淀、视频知识库和交付型纪要场景。
 ---
 
