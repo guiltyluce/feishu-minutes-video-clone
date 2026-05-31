@@ -5,6 +5,8 @@ description: 飞书妙记视频纪要蒸馏助手：把飞书/Lark 妙记或本�
 
 # 飞书妙记视频纪要蒸馏助手
 
+GitHub: [guiltyluce/feishu-minutes-video-clone](https://github.com/guiltyluce/feishu-minutes-video-clone)
+
 用于把飞书/Lark 妙记录制或本地会议视频蒸馏成可交付材料：本地高清视频、中文字幕、结构化纪要文档、新上传的高清妙记，以及文档中的预览卡片入口。
 
 # 触发场景
