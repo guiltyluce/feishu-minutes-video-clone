@@ -48,7 +48,7 @@ bash -n scripts/mux_subtitles.sh
 
 ## Skill 安装
 
-参赛上传包位置：
+Skill 分发包位置：
 
 ```text
 skill/feishu-minutes-video-clone/feishu-minutes-video-clone.zip
@@ -60,14 +60,6 @@ skill/feishu-minutes-video-clone/feishu-minutes-video-clone.zip
 mkdir -p ~/.codex/skills
 unzip -o skill/feishu-minutes-video-clone/feishu-minutes-video-clone.zip -d ~/.codex/skills/
 ```
-
-## 参赛信息
-
-- 作品名称：飞书妙记视频纪要蒸馏助手
-- 推荐赛道：Skill 技能赛道
-- 推荐行业：专业服务
-- 推荐场景：办公提效
-- 一句话描述：把飞书妙记蒸馏成高清字幕视频和结构化纪要。
 
 ## License
 
