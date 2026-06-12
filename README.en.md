@@ -21,6 +21,7 @@
 - Use ffmpeg to mux or burn Chinese subtitles.
 - Generate structured Feishu meeting-summary documents.
 - Upload high-resolution subtitled videos and switch the document entry to a preview card.
+- Enforce post-download checks on duration and resolution, rejecting partial downloads and low-res preview streams.
 - Verify that the final document does not expose the original Minutes link or process notes.
 
 ## Repository Layout
@@ -34,6 +35,9 @@
 │   └── preview-card.md
 ├── scripts/
 │   ├── mux_subtitles.sh
+│   ├── verify_media.sh
+│   ├── install.sh
+│   ├── package.sh
 │   └── validate_skill_package.py
 └── skill/
     └── feishu-minutes-video-clone/
@@ -45,22 +49,23 @@
 
 ```bash
 python3 scripts/validate_skill_package.py --zip
-bash -n scripts/mux_subtitles.sh
+bash -n scripts/mux_subtitles.sh scripts/verify_media.sh
 ```
 
 ## Skill Installation
 
-The distributable Skill package is located at:
+SKILL.md is a cross-agent standard; the same package works in multiple environments.
 
-```text
-skill/feishu-minutes-video-clone/feishu-minutes-video-clone.zip
-```
-
-Install it into the local Skill directory:
+Local CLIs (installs into Claude Code `~/.claude/skills/` and Codex `~/.codex/skills/`):
 
 ```bash
-mkdir -p ~/.codex/skills
-unzip -o skill/feishu-minutes-video-clone/feishu-minutes-video-clone.zip -d ~/.codex/skills/
+bash scripts/install.sh
+```
+
+Upload-style platforms (claude.ai Skills, WorkBuddy, etc.): upload the rebuilt package
+
+```bash
+bash scripts/package.sh   # rebuilds skill/feishu-minutes-video-clone/feishu-minutes-video-clone.zip
 ```
 
 ## License

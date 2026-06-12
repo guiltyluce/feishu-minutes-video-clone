@@ -21,6 +21,7 @@
 - 使用 ffmpeg 封装或烧录中文字幕。
 - 生成结构化飞书纪要文档。
 - 上传高清字幕视频并切换预览卡片入口。
+- 下载后强制校验视频时长与分辨率，拒绝半截下载和低清预览流。
 - 验证文档中不泄露原始妙记链接和过程说明。
 
 ## 目录
@@ -34,6 +35,9 @@
 │   └── preview-card.md
 ├── scripts/
 │   ├── mux_subtitles.sh
+│   ├── verify_media.sh
+│   ├── install.sh
+│   ├── package.sh
 │   └── validate_skill_package.py
 └── skill/
     └── feishu-minutes-video-clone/
@@ -45,22 +49,23 @@
 
 ```bash
 python3 scripts/validate_skill_package.py --zip
-bash -n scripts/mux_subtitles.sh
+bash -n scripts/mux_subtitles.sh scripts/verify_media.sh
 ```
 
 ## Skill 安装
 
-Skill 分发包位置：
+SKILL.md 是跨 Agent 通用格式，同一份包可在多个环境使用。
 
-```text
-skill/feishu-minutes-video-clone/feishu-minutes-video-clone.zip
-```
-
-安装到本地 Skill 目录：
+本地 CLI（自动安装到 Claude Code `~/.claude/skills/` 和 Codex `~/.codex/skills/`）：
 
 ```bash
-mkdir -p ~/.codex/skills
-unzip -o skill/feishu-minutes-video-clone/feishu-minutes-video-clone.zip -d ~/.codex/skills/
+bash scripts/install.sh
+```
+
+上传类平台（claude.ai Skills、WorkBuddy 等）：上传分发包
+
+```bash
+bash scripts/package.sh   # 重建 skill/feishu-minutes-video-clone/feishu-minutes-video-clone.zip
 ```
 
 ## License
