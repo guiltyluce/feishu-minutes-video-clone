@@ -13,6 +13,10 @@ Use this when a document currently shows a bare Minutes link and the user wants 
 
 ## CDP-assisted steps
 
+These commands assume the Claude Code web-access CDP proxy on `localhost:3456`. In other environments (MCP Playwright, Codex browser tools), run the same page JavaScript via that environment's evaluate/click tools — only the wrapper differs.
+
+CSS selectors below may drift as Feishu updates its UI. If a selector stops matching, locate the element by its visible text (`预览视图` / `链接视图`) instead.
+
 Find the doc target:
 
 ```bash

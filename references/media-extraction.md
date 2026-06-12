@@ -2,12 +2,20 @@
 
 Use this reference when a Feishu/Lark Minutes page does not expose a simple downloadable video URL.
 
+## Required capability
+
+You need a browser automation that can (a) reuse the user's logged-in Feishu session and (b) evaluate JavaScript in the page. Pick whatever the current environment provides:
+
+- **Claude Code with the web-access skill**: start the CDP proxy via `bash ~/.claude/skills/web-access/scripts/check-deps.sh`, then use the `http://localhost:3456` endpoints shown below.
+- **MCC Playwright / Codex / other agents**: open the Minutes URL in the logged-in browser and run the same JavaScript snippets through the environment's `evaluate` tool. The snippets are plain page JavaScript; only the invocation wrapper differs.
+
+The examples below use the CDP proxy form. Translate mechanically for other environments.
+
 ## Browser-first approach
 
-Start the CDP proxy and use the user's logged-in Chrome:
+Open the Minutes page in the logged-in browser:
 
 ```bash
-bash ~/.claude/skills/web-access/scripts/check-deps.sh
 curl -s "http://localhost:3456/targets"
 curl -s "http://localhost:3456/new?url=MINUTES_URL"
 ```
@@ -53,13 +61,11 @@ curl -s -X POST "http://localhost:3456/eval?target=TARGET_ID" -d \
 - HLS/M3U8: use `ffmpeg -allowed_extensions ALL -i URL -c copy output.mp4`.
 - Signed/protected URLs: preserve the exact URL and required headers. If simple `ffmpeg` fails, capture request headers from browser devtools/CDP or use browser cookies with `yt-dlp --cookies-from-browser chrome`.
 
-Always verify:
+Always verify with the bundled script (duration vs Minutes metadata, resolution not a low-res preview):
 
 ```bash
-ffprobe -hide_banner -show_streams -show_format output.mp4
+bash scripts/verify_media.sh output.mp4 EXPECTED_DURATION_SECONDS
 ```
-
-Check that duration matches the Minutes metadata and that resolution is not a low-resolution preview.
 
 ## Subtitle resources
 

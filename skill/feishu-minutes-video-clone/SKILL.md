@@ -23,9 +23,10 @@ GitHub: [guiltyluce/feishu-minutes-video-clone](https://github.com/guiltyluce/fe
 # 所需工具
 
 - `lark-cli`：读取妙记元数据、会议纪要、文档创建和更新。
-- `web-access` 或浏览器自动化：处理登录态页面、受保护媒体资源和预览卡切换。
+- 任一可复用登录态并执行页面 JavaScript 的浏览器自动化：Claude Code 的 `web-access` skill、MCP Playwright、或所在平台自带的浏览器工具（references 中的脚本是纯页面 JS，换环境只需换调用方式）。
 - `ffmpeg` / `ffprobe`：下载、验证和封装字幕视频。
 - `scripts/mux_subtitles.sh`：软字幕封装和可选烧录字幕。
+- `scripts/verify_media.sh`：校验下载视频的时长与分辨率，防止半截下载和低清预览流。
 
 # 工作流程
 
@@ -40,6 +41,7 @@ GitHub: [guiltyluce/feishu-minutes-video-clone](https://github.com/guiltyluce/fe
    - 优先使用用户提供的本地视频。
    - 否则用登录浏览器检查 `<video>`、`.mp4`、`.m3u8`、字幕资源和 signed URL。
    - 参考 `references/media-extraction.md`。
+   - 下载完成后必须用 `scripts/verify_media.sh <video> <妙记时长秒数>` 校验，时长偏差超 2% 视为下载不完整，需重新下载而不是继续流程。
 4. 准备中文字幕：
    - 优先使用带时间轴的 `.srt` / `.vtt`。
    - 只有无时间轴文本时，不静默伪造字幕时间；需说明限制或请求确认。
@@ -63,10 +65,10 @@ bash scripts/mux_subtitles.sh \
   video.mp4 zh-CN.srt video.中文字幕.mp4
 ```
 
-媒体验证：
+媒体验证（时长对照妙记元数据，偏差超 2% 非零退出）：
 
 ```bash
-ffprobe -hide_banner -show_streams -show_format video.中文字幕.mp4
+bash scripts/verify_media.sh video.中文字幕.mp4 3600
 ```
 
 # 注意事项
